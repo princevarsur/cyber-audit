@@ -73,7 +73,7 @@ The app ships pointed at a pre-provisioned Supabase project with the schema and 
    NEXT_PUBLIC_SUPABASE_ANON_KEY=<your publishable/anon key>
    ```
 
-> **Security note (portfolio tradeoff):** to keep the demo login-free, RLS policies in `0002_rls.sql` allow the anonymous role to read *and write*. In a production deployment you would gate writes behind Supabase Auth and restrict policies to authenticated users/roles.
+> **Security note (portfolio tradeoff):** to keep the demo login-free, RLS policies in `0002_rls.sql` allow the anonymous role to read *and write*. In a production deployment you would gate writes behind Supabase Auth and restrict policies to authenticated users/roles. An optional hardening migration — [`supabase/migrations/0003_optional_auth_rls.sql`](supabase/migrations/0003_optional_auth_rls.sql) — makes anon **read-only** and requires authentication to write. Apply it *after* adding a Supabase Auth sign-in flow (otherwise the anon-key CRUD forms stop working).
 
 ---
 
